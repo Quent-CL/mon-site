@@ -1,25 +1,62 @@
 <!doctype html>
 <html lang="fr">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <!-- SEO de base -->
+  <title>TCL Assistance - Montage pneus à domicile</title>
 
+  <meta name="description" content="Montage de pneus à domicile, dépannage rapide, petites réparations auto. Intervention rapide et professionnelle sur rendez-vous.">
+  <meta name="robots" content="index,follow">
 
-<title>TCL Assistance - Montage pneus à domicile</title>
+  <link rel="canonical" href="https://tcl-am.fr/">
 
-<meta name="description" content="Montage de pneus à domicile, dépannage rapide, petites réparations auto. Intervention rapide et professionnelle sur rendez-vous.">
+  <!-- Open Graph -->
+  <meta property="og:title" content="TCL Assistance - Montage pneus à domicile">
+  <meta property="og:description" content="Service rapide, professionnel et mobile. Dépannage et montage pneus à domicile.">
+  <meta property="og:url" content="https://tcl-am.fr/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://tcl-am.fr/og-image.jpg">
 
-<link rel="canonical" href="https://tcl-am.fr/">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TCL Assistance - Montage pneus à domicile">
+  <meta name="twitter:description" content="Montage et dépannage de pneus à domicile. Service mobile rapide et professionnel.">
+  <meta name="twitter:image" content="https://tcl-am.fr/og-image.jpg">
 
-<meta property="og:title" content="TCL Assistance - Montage pneus à domicile">
-<meta property="og:description" content="Service rapide, professionnel et mobile. Dépannage et montage pneus à domicile.">
-<meta property="og:url" content="https://tcl-am.fr/">
-<meta property="og:type" content="website">
+  <!-- Données structurées Schema.org (SEO invisible pour Google) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutomotiveBusiness",
+    "name": "TCL Assistance",
+    "url": "https://tcl-am.fr/",
+    "description": "Service mobile de montage et dépannage de pneus à domicile ou sur votre lieu de travail. Intervention rapide, professionnelle et flexible autour de Grenoble et Voiron.",
+    "telephone": "+33758663069",
+    "email": "contact.tclassistance@gmail.com",
+    "areaServed": [
+      "Grenoble",
+      "Voiron",
+      "Rives",
+      "Tullins",
+      "Moirans"
+    ],
+    "serviceArea": {
+      "@type": "Place",
+      "name": "Isère"
+    },
+    "sameAs": [
+      "https://tcl-am.fr/"
+    ]
+  }
+  </script>
 
-
+  <!-- Fonts & Leaflet (ton code existant) -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
   <style>
     :root{
       --brand:#2B8CF0;
@@ -90,14 +127,11 @@
     .deco{position:relative;height:calc(var(--deco-size)*.28);overflow:hidden}
     .deco .wheel{position:absolute;left:50%;bottom:0;transform:translateX(-50%);opacity:var(--deco-opacity);width:var(--deco-size);height:auto;will-change:transform}
 
-
-
-/*
-#estStatus {
-  display: none;
-}
-*/
-
+    /*
+    #estStatus {
+      display: none;
+    }
+    */
 
     /* ZONE D’INTERVENTION */
     #zone { padding:64px 0; border-top:1px solid #f2f3f5; }
@@ -182,93 +216,54 @@
 
     .foot{padding:28px 0;text-align:center;color:#94a3b8;font-size:14px}
 
-
-
-
-
-
-
-
-/* Style moderne pour les sélecteurs (pneus, ampoules, etc.) */
-select {
-  appearance: none;           /* enlève le style par défaut */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-color: #fff;
-  border: 1px solid #d1d5db;
-  border-radius: 10px;
-  padding: 10px 34px 10px 12px;
-  font: inherit;
-  font-weight: 600;
-  color: #111827;
-  cursor: pointer;
-  background-image: url('data:image/svg+xml;utf8,<svg fill="%23111827" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M5 8l5 5 5-5z"/></svg>');
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 14px;
-  transition: 0.2s ease;
-}
-select:hover {
-  border-color: #2B8CF0;
-  box-shadow: 0 0 0 2px rgba(43, 140, 240, 0.15);
-}
-select:focus {
-  outline: none;
-  border-color: #2B8CF0;
-  box-shadow: 0 0 0 3px rgba(43, 140, 240, 0.25);
-}
-
-
-
-
-
-
-
-
+    /* Style moderne pour les sélecteurs (pneus, ampoules, etc.) */
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-color: #fff;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      padding: 10px 34px 10px 12px;
+      font: inherit;
+      font-weight: 600;
+      color: #111827;
+      cursor: pointer;
+      background-image: url('data:image/svg+xml;utf8,<svg fill="%23111827" height="20" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M5 8l5 5 5-5z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 14px;
+      transition: 0.2s ease;
+    }
+    select:hover {
+      border-color: #2B8CF0;
+      box-shadow: 0 0 0 2px rgba(43, 140, 240, 0.15);
+    }
+    select:focus {
+      outline: none;
+      border-color: #2B8CF0;
+      box-shadow: 0 0 0 3px rgba(43, 140, 240, 0.25);
+    }
 
     @media (prefers-reduced-motion:reduce){
       .topbar a:hover,.feature:hover,.xp-card:hover{transform:none}
       .hero-bg,.deco .wheel{transform:none!important}
     }
 
-
-
-
-
-
-/* --- Ajustement mobile : réduire légèrement la police --- */
-@media (max-width: 480px){
-  .svc-title { font-size: 14px; }
-  .svc-note { font-size: 0px; }
-  .svc-price { font-size: 13px; }
-  .svc-line { padding: 12px 10px; }
-  .svc-qty, #pneuSelect {
-    font-size: 14px;
-    padding: 8px;
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
+    /* --- Ajustement mobile : réduire légèrement la police --- */
+    @media (max-width: 480px){
+      .svc-title { font-size: 14px; }
+      .svc-note { font-size: 0px; }
+      .svc-price { font-size: 13px; }
+      .svc-line { padding: 12px 10px; }
+      .svc-qty, #pneuSelect {
+        font-size: 14px;
+        padding: 8px;
+      }
+    }
   </style>
 </head>
+
 <body>
   <div class="topbar">
     <div class="topbar-wrap">
@@ -358,7 +353,7 @@ select:focus {
               </button>
             </div>
 
-<div class="est-status" id="estStatus">Point de départ : Le Pont-de-Claix</div>
+            <div class="est-status" id="estStatus">Point de départ : Le Pont-de-Claix</div>
 
             <!-- Prestations (main-d’œuvre, hors pièces) -->
             <div class="services" id="servicesBox">
@@ -383,28 +378,28 @@ select:focus {
                 <div class="svc-right"><span class="svc-price" data-price="10">10 €</span></div>
               </div>
               <div class="svc-line">
-  <div class="svc-left">
-    <input type="checkbox" id="amp" />
-    <label for="amp" class="svc-title">Ampoules - pose</label>
-    <span class="svc-note">(hors ampoule)</span>
-  </div>
-  <div class="svc-right">
-    <select id="ampQty" class="svc-qty" disabled>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10</option>
-    </select>
-    <span>×</span>
-    <span class="svc-price" data-price="8">8 €</span>
-  </div>
-</div>
+                <div class="svc-left">
+                  <input type="checkbox" id="amp" />
+                  <label for="amp" class="svc-title">Ampoules - pose</label>
+                  <span class="svc-note">(hors ampoule)</span>
+                </div>
+                <div class="svc-right">
+                  <select id="ampQty" class="svc-qty" disabled>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                  </select>
+                  <span>×</span>
+                  <span class="svc-price" data-price="8">8 €</span>
+                </div>
+              </div>
 
               <div class="svc-line">
                 <div class="svc-left">
@@ -610,47 +605,45 @@ select:focus {
         const a=Math.sin(dLat/2)**2 + Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLon/2)**2;
         return 2*R*Math.asin(Math.sqrt(a));
       }
-async function geocode(q){
-  // 1) Nettoyage + forcer France
-  let query = q.trim();
-  if (!/france/i.test(query)) query += ', France';
+      async function geocode(q){
+        // 1) Nettoyage + forcer France
+        let query = q.trim();
+        if (!/france/i.test(query)) query += ', France';
 
-  // Centre : Le Pont-de-Claix
-  const centerLat = 45.126, centerLon = 5.706;
+        // Centre : Le Pont-de-Claix
+        const centerLat = 45.126, centerLon = 5.706;
 
-  // Viewbox large ≈ rayon ~80 km (couvre Voiron, Bourgoin, Chambéry, Vienne…)
-  const viewbox = [
-    (centerLon - 1.05).toFixed(3), // Ouest
-    (centerLat - 0.80).toFixed(3), // Sud
-    (centerLon + 1.05).toFixed(3), // Est
-    (centerLat + 0.80).toFixed(3)  // Nord
-  ].join(',');
+        // Viewbox large ≈ rayon ~80 km (couvre Voiron, Bourgoin, Chambéry, Vienne…)
+        const viewbox = [
+          (centerLon - 1.05).toFixed(3), // Ouest
+          (centerLat - 0.80).toFixed(3), // Sud
+          (centerLon + 1.05).toFixed(3), // Est
+          (centerLat + 0.80).toFixed(3)  // Nord
+        ].join(',');
 
-  // ----- Essai 1 : biais régional (PAS bounded)
-  let url = 'https://nominatim.openstreetmap.org/search'
-    + '?format=jsonv2&limit=1&addressdetails=1&countrycodes=fr'
-    + '&viewbox=' + encodeURIComponent(viewbox)
-    + '&q=' + encodeURIComponent(query);
+        // ----- Essai 1 : biais régional (PAS bounded)
+        let url = 'https://nominatim.openstreetmap.org/search'
+          + '?format=jsonv2&limit=1&addressdetails=1&countrycodes=fr'
+          + '&viewbox=' + encodeURIComponent(viewbox)
+          + '&q=' + encodeURIComponent(query);
 
-  let res = await fetch(url, { headers:{ 'Accept':'application/json' }});
-  if (!res.ok) throw new Error('Geocoding HTTP error');
-  let data = await res.json();
+        let res = await fetch(url, { headers:{ 'Accept':'application/json' }});
+        if (!res.ok) throw new Error('Geocoding HTTP error');
+        let data = await res.json();
 
-  // ----- Essai 2 : secours France entière si rien trouvé
-  if (!data || !data[0]) {
-    url = 'https://nominatim.openstreetmap.org/search'
-      + '?format=jsonv2&limit=1&addressdetails=1&countrycodes=fr'
-      + '&q=' + encodeURIComponent(query);
-    res = await fetch(url, { headers:{ 'Accept':'application/json' }});
-    if (!res.ok) throw new Error('Geocoding HTTP error (fallback)');
-    data = await res.json();
-    if (!data || !data[0]) throw new Error('Adresse introuvable');
-  }
+        // ----- Essai 2 : secours France entière si rien trouvé
+        if (!data || !data[0]) {
+          url = 'https://nominatim.openstreetmap.org/search'
+            + '?format=jsonv2&limit=1&addressdetails=1&countrycodes=fr'
+            + '&q=' + encodeURIComponent(query);
+          res = await fetch(url, { headers:{ 'Accept':'application/json' }});
+          if (!res.ok) throw new Error('Geocoding HTTP error (fallback)');
+          data = await res.json();
+          if (!data || !data[0]) throw new Error('Adresse introuvable');
+        }
 
-  return { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) };
-}
-
-
+        return { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) };
+      }
 
       function servicesTotal(){
         let total = 0;
@@ -691,9 +684,9 @@ async function geocode(q){
           d = d * 2;                    // aller-retour
 
           // ⚠️ Vérification de cohérence de distance
-if (d > 120) {
-  alert("Distance estimée élevée. Ajoutez la ville et le code postal (ex: \"Voiron 38500, France\").");
-}
+          if (d > 120) {
+            alert("Distance estimée élevée. Ajoutez la ville et le code postal (ex: \"Voiron 38500, France\").");
+          }
 
           const travelVar = d * COST_PER_KM;
           const travelCost = travelVar + CONFIG.FORFAIT_DEPLACEMENT;
