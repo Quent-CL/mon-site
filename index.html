@@ -32,7 +32,7 @@
   <meta name="twitter:description" content="Montage et dépannage de pneus à domicile. Service mobile rapide et professionnel autour de Grenoble.">
   <meta name="twitter:image" content="https://tcl-am.fr/HTML/LOGOS/MINIATURE.png">
 
-  <!-- Données structurées Schema.org (SEO invisible pour Google) -->
+  <!-- Données structurées Schema.org -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -60,7 +60,7 @@
   }
   </script>
 
-  <!-- Fonts & Leaflet (ton code existant) -->
+  <!-- Fonts & Leaflet -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 
@@ -134,12 +134,6 @@
     .deco{position:relative;height:calc(var(--deco-size)*.28);overflow:hidden}
     .deco .wheel{position:absolute;left:50%;bottom:0;transform:translateX(-50%);opacity:var(--deco-opacity);width:var(--deco-size);height:auto;will-change:transform}
 
-    /*
-    #estStatus {
-      display: none;
-    }
-    */
-
     /* ZONE D’INTERVENTION */
     #zone { padding:64px 0; border-top:1px solid #f2f3f5; }
     #zone .map-wrap{max-width:1100px;margin:0 auto;padding:0 24px}
@@ -194,12 +188,59 @@
     .est-row input, .est-row select{
       flex:1 1 300px; padding:12px;border:1px solid #e5e7eb;border-radius:12px;font:inherit;
     }
+
+    /* Wrapper adresse + suggestions */
+    .est-address-wrap{
+      position:relative;
+      flex:1 1 300px;
+    }
+    .est-address-wrap input{
+      width:100%;
+    }
+
+    /* Liste de suggestions claire */
+    .est-suggestions{
+      position:absolute;
+      left:0;
+      right:0;
+      top:100%;
+      margin-top:4px;
+      background:#f9fafb;
+      border:1px solid #d1d5db;
+      border-radius:10px;
+      box-shadow:0 8px 20px rgba(0,0,0,.08);
+      max-height:220px;
+      overflow:auto;
+      z-index:40;
+      display:none;
+    }
+    .est-suggest-item{
+      display:block;
+      width:100%;
+      text-align:left;
+      padding:9px 12px;
+      border:0;
+      background:#f9fafb;
+      font:inherit;
+      font-size:14px;
+      color:#111827;
+      cursor:pointer;
+      border-bottom:1px solid #e5e7eb;
+    }
+    .est-suggest-item:last-child{
+      border-bottom:none;
+    }
+    .est-suggest-item:hover{
+      background:#e0f2fe;
+      color:#111827;
+    }
+
     .est-row button{
       display:inline-flex;align-items:center;gap:8px;background:#111827;color:#fff;
       font-weight:800;border-radius:12px;border:1px solid #0b1220;padding:12px 16px;cursor:pointer;
     }
     .est-row button:hover{filter:brightness(1.05)}
-    .est-status{margin-top:10px;font-size:14px;color:var(--muted)}
+    .est-status{margin-top:10px;font-size:14px;color:var(--muted);min-height:1.2em}
 
     /* Prestations */
     .services{margin-top:14px; display:grid; gap:10px}
@@ -257,7 +298,7 @@
       .hero-bg,.deco .wheel{transform:none!important}
     }
 
-    /* --- Ajustement mobile : réduire légèrement la police --- */
+    /* --- Ajustement mobile --- */
     @media (max-width: 480px){
       .svc-title { font-size: 14px; }
       .svc-note { font-size: 0px; }
@@ -272,19 +313,6 @@
 </head>
 
 <body>
-
-  <!-- H1 caché pour SEO (TCL Assistance / pneus / dépannage auto) -->
-  <h1 style="
-    position:absolute;
-    left:-9999px;
-    width:1px;
-    height:1px;
-    overflow:hidden;
-  ">
-    TCL Assistance – montage de pneus à domicile, dépannage auto et petites réparations
-    autour de Grenoble, Voiron, Pont-de-Claix et leurs alentours.
-  </h1>
-
   <div class="topbar">
     <div class="topbar-wrap">
       <a href="#contact" aria-label="Contacter TCL Assistance">
@@ -315,13 +343,7 @@
     <div class="container">
       <h2>Votre assistance auto <span style="color:var(--brand)">mobile</span> en Rhône-Alpes</h2>
       <div class="pitch">
-        <p>
-          <strong>TCL Assistance</strong>, service de montage de pneus à domicile et de dépannage auto,
-          intervient là où vous êtes (domicile, travail, parking) pour le <strong>montage de pneus</strong>,
-          les <strong>petites réparations</strong> et le <strong>dépannage rapide</strong>. Zone d’intervention :
-          <strong>Rhône-Alpes</strong> et alentours. <strong>Tarifs attractifs</strong>, délais courts, service
-          pro et souriant.
-        </p>
+        <p><strong>TCL Assistance</strong> intervient là où vous êtes (domicile, travail, parking) pour le <strong>montage de pneus</strong>, les <strong>petites réparations</strong> et le <strong>dépannage rapide</strong>. Zone d’intervention : <strong>Rhône-Alpes</strong> et alentours. <strong>Tarifs attractifs</strong>, délais courts, service pro et souriant.</p>
       </div>
     </div>
   </section>
@@ -372,14 +394,17 @@
             <!-- Adresse -->
             <div class="est-row">
               <label for="estAddress">Adresse d’intervention</label>
-              <input id="estAddress" placeholder="Ex : 1 Rue de la Paix, 38800 Le Pont-de-Claix" />
+              <div class="est-address-wrap">
+                <input id="estAddress" placeholder="Ex : 1 Rue de la Paix, 38800 Le Pont-de-Claix" autocomplete="off" />
+                <div class="est-suggestions" id="estSuggest"></div>
+              </div>
               <button id="estCalc" type="button">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M5 4h14v2H5V4zm0 7h14v2H5v-2zm0 7h8v2H5v-2z"/></svg>
                 Calculer
               </button>
             </div>
 
-            <div class="est-status" id="estStatus">Point de départ : Le Pont-de-Claix</div>
+            <div class="est-status" id="estStatus"></div>
 
             <!-- Prestations (main-d’œuvre, hors pièces) -->
             <div class="services" id="servicesBox">
@@ -505,7 +530,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script>
     /* =========================
-       🎛️ CONFIG — À MODIFIER ICI
+       CONFIG ESTIMATION
        ========================= */
     const CONFIG = {
       BASE_CITY: 'Le Pont-de-Claix, France',
@@ -599,6 +624,7 @@
     (function(){
       // DOM
       const addrInput = document.getElementById('estAddress');
+      const suggestBox = document.getElementById('estSuggest');
       const btn = document.getElementById('estCalc');
       const status = document.getElementById('estStatus');
       const box = document.getElementById('estResult');
@@ -639,7 +665,7 @@
         // Centre : Le Pont-de-Claix
         const centerLat = 45.126, centerLon = 5.706;
 
-        // Viewbox large ≈ rayon ~80 km (couvre Voiron, Bourgoin, Chambéry, Vienne…)
+        // Viewbox large ≈ rayon ~80 km
         const viewbox = [
           (centerLon - 1.05).toFixed(3), // Ouest
           (centerLat - 0.80).toFixed(3), // Sud
@@ -647,7 +673,7 @@
           (centerLat + 0.80).toFixed(3)  // Nord
         ].join(',');
 
-        // ----- Essai 1 : biais régional (PAS bounded)
+        // Essai 1 : biais régional
         let url = 'https://nominatim.openstreetmap.org/search'
           + '?format=jsonv2&limit=1&addressdetails=1&countrycodes=fr'
           + '&viewbox=' + encodeURIComponent(viewbox)
@@ -657,7 +683,7 @@
         if (!res.ok) throw new Error('Geocoding HTTP error');
         let data = await res.json();
 
-        // ----- Essai 2 : secours France entière si rien trouvé
+        // Secours France entière
         if (!data || !data[0]) {
           url = 'https://nominatim.openstreetmap.org/search'
             + '?format=jsonv2&limit=1&addressdetails=1&countrycodes=fr'
@@ -709,7 +735,7 @@
           d = d * CONFIG.ROUTE_FACTOR;  // route réelle
           d = d * 2;                    // aller-retour
 
-          // ⚠️ Vérification de cohérence de distance
+          // Vérification de cohérence de distance
           if (d > 120) {
             alert("Distance estimée élevée. Ajoutez la ville et le code postal (ex: \"Voiron 38500, France\").");
           }
@@ -720,7 +746,7 @@
           lastTravel = { km: d, travelCost: travelCost };
 
           render();
-          if (status) status.textContent = 'Point de départ : Le Pont-de-Claix';
+          if (status) status.textContent = ''; // on efface, plus de texte après le calcul
         }catch(e){
           console.error(e);
           if (status) status.textContent = 'Impossible d’estimer automatiquement. Vérifiez l’adresse.';
@@ -734,7 +760,8 @@
         const total = lastTravel.travelCost + svc.total;
 
         const parts = [];
-        parts.push('Déplacement (AR ~ ' + lastTravel.km.toFixed(1).replace('.', ',') + ' km) : ' + formatEuro(lastTravel.travelCost));
+        parts.push('Déplacement : ' + formatEuro(lastTravel.travelCost));
+
         if(svc.lines.length){ parts.push(svc.lines.join('<br>')); }
         outBreak.innerHTML = parts.join('<br>');
         outTotal.textContent = formatEuro(total);
@@ -750,6 +777,94 @@
         el.addEventListener('change', render);
         el.addEventListener('input', render);
       });
+
+      /* ==== Autocomplétion Nominatim pour l'adresse ==== */
+      let suggestTimer = null;
+
+      function clearSuggestions(){
+        if(!suggestBox) return;
+        suggestBox.innerHTML = '';
+        suggestBox.style.display = 'none';
+      }
+
+      async function fetchSuggestions(q){
+        if(!suggestBox) return;
+        let query = q.trim();
+        if (!query) { clearSuggestions(); return; }
+        if (!/france/i.test(query)) query += ', France';
+
+        const centerLat = 45.126, centerLon = 5.706;
+        const viewbox = [
+          (centerLon - 1.05).toFixed(3),
+          (centerLat - 0.80).toFixed(3),
+          (centerLon + 1.05).toFixed(3),
+          (centerLat + 0.80).toFixed(3)
+        ].join(',');
+
+        const url = 'https://nominatim.openstreetmap.org/search'
+          + '?format=jsonv2&limit=8&addressdetails=1&countrycodes=fr'
+          + '&viewbox=' + encodeURIComponent(viewbox)
+          + '&q=' + encodeURIComponent(query);
+
+        try{
+          const res = await fetch(url, { headers:{ 'Accept':'application/json' }});
+          if(!res.ok) throw new Error('HTTP');
+          const data = await res.json();
+          if(!Array.isArray(data) || !data.length){
+            clearSuggestions();
+            return;
+          }
+
+          // On garde seulement les résultats "adresse" (pas les commerces)
+          const allowedTypes = [
+            'house','residential','road','street','suburb',
+            'neighbourhood','hamlet','village','town','city','quarter'
+          ];
+          let list = data.filter(place =>
+            place.class === 'place' &&
+            allowedTypes.includes(place.type || '')
+          );
+
+          // Si rien trouvé avec le filtrage, on garde tout (pour ne pas planter)
+          if(!list.length) list = data;
+
+          const html = list.map(place => {
+            const label = place.display_name || '';
+            const safe = label.replace(/"/g,'&quot;');
+            return `<button type="button" class="est-suggest-item">${safe}</button>`;
+          }).join('');
+          suggestBox.innerHTML = html;
+          suggestBox.style.display = 'block';
+        }catch(e){
+          console.error(e);
+          clearSuggestions();
+        }
+      }
+
+      if(addrInput && suggestBox){
+        addrInput.addEventListener('input', () => {
+          const q = addrInput.value.trim();
+          clearTimeout(suggestTimer);
+          if(q.length < 3){
+            clearSuggestions();
+            return;
+          }
+          suggestTimer = setTimeout(() => { fetchSuggestions(q); }, 350);
+        });
+
+        // Sélection d’une suggestion
+        suggestBox.addEventListener('click', (e) => {
+          const btn = e.target.closest('.est-suggest-item');
+          if(!btn) return;
+          addrInput.value = btn.textContent;
+          clearSuggestions();
+        });
+
+        // Masquer à la perte de focus (avec petit délai pour laisser le clic passer)
+        addrInput.addEventListener('blur', () => {
+          setTimeout(clearSuggestions, 200);
+        });
+      }
     })();
 
     /* ===== Carte Leaflet (zones) ===== */
